@@ -3,79 +3,105 @@
 
 @section('main_content')
 
-<div class="container-fluid home-banner" style="background-image:url({{asset('dist-front/images/banner-home.jpg')}});">
+<div class="container-fluid home-banner" style="background-image:url({{asset('uploads/'.$home_banner->background)}});">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="static-banner-detail">
-                    <h4>September 20-24, 2024, California</h4>
-                    <h2>Event and Conference Website</h2>
-                    <p>
-                        Join us at our next networking event and conference! Connect with industry professionals, engage in insightful discussions, and attend hands-on workshops. Learn from experts, collaborate on innovative ideas, and build lasting relationships.
-                    </p>
+                    <h4>{{ $home_banner->subheading }}</h4>
+                    <h2>{{ $home_banner->heading }}</h2>
+                    @if($home_banner->text != '')
+                    <p>{!! $home_banner->text !!}</p>
+                    @endif
+
+                    
+                    @php
+                        $dt = new DateTime();
+                        $d1 = $dt->createFromFormat('m/d/Y H:i:s', date('m/d/Y H:i:s'));
+                        $d2 = $dt->createFromFormat('m/d/Y H:i:s', date($home_banner->event_date . ' ' . $home_banner->event_time));
+                        $interval = $d1->diff($d2);
+                        $days = $interval->days;
+                        if(strlen($days) == 1){
+                            $days = '0'.$days;
+                        }
+                        $hours = $interval->h;
+                        if(strlen($hours) == 1){
+                            $hours = '0'.$hours;
+                        }
+                        $minutes = $interval->i;
+                        if(strlen($minutes) == 1){
+                            $minutes = '0'.$minutes;
+                        }
+                        $seconds = $interval->s;
+                        if(strlen($seconds) == 1){
+                            $seconds = '0'.$seconds;
+                        }
+                    @endphp
                     <div class="counter-area">
                         <div class="countDown clearfix">
                             <div class="row count-down-bg">
                                 <div class="col-lg-3 col-sm-6 col-xs-12">
                                     <div class="single-count day">
-                                        <h1 class="days">46</h1>
+                                        <h1 class="days">{{ $days }}</h1>
                                         <p class="days_ref">days</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-sm-6 col-xs-12">
                                     <div class="single-count hour">
-                                        <h1 class="hours">09</h1>
+                                        <h1 class="hours">{{ $hours }}</h1>
                                         <p class="hours_ref">hours</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-sm-6 col-xs-12">
                                     <div class="single-count min">
-                                        <h1 class="minutes">55</h1>
+                                        <h1 class="minutes">{{ $minutes }}</h1>
                                         <p class="minutes_ref">minutes</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-sm-6 col-xs-12">
                                     <div class="single-count second">
-                                        <h1 class="seconds">02</h1>
+                                        <h1 class="seconds">{{ $seconds }}</h1>
                                         <p class="seconds_ref">seconds</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <a href="buy.html" class="banner_btn video_btn">BUY TICKETS</a>
+                    <a href="" class="banner_btn video_btn">BUY TICKETS</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
+@if ($home_welcome->status == 'show')
 <section id="about-section" class="pt_70 pb_70 white">
     <div class="container">
         <div class="row">
             <div class="col-lg-7 col-sm-12 col-xs-12">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2><span class="color_green">Welcome To Our Website</span></h2>
+                        <h2> <span class="color_green"> {{ $home_welcome->heading }} </span> </h2>
                     </div>
                 </div>
                 <div class="about-details">
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stan when an unknown printer took a galley of type and scramble. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stan when an unknown printer took a galley of type and scramble. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <p>{!! nl2br($home_welcome->description) !!}</p>
+                    @if ($home_welcome->button_text != '')
                     <div class="global_btn mt_20">
-                        <a class="btn_one" href="#">READ MORE</a>
+                        <a class="btn_one" href="{{ $home_welcome->button_link }}">{{ $home_welcome->button_text }}</a>
                     </div>
+                    @endif
                 </div>
             </div>
             <div class="col-lg-5 col-sm-12 col-xs-12">
                 <div class="about-details-img">
-                    <img src="{{asset('dist-front/images/about.jpg')}}" alt="image">
+                    <img src="{{asset('uploads/'.$home_welcome->photo)}}" alt="image">
                 </div>
             </div>
         </div>
     </div>
 </section>
+@endif
 
 
 
@@ -94,84 +120,60 @@
             <div class="col-sm-1 col-lg-2"></div>
         </div>
         <div class="row pt_40">
+            @foreach($speakers as $speaker)
             <div class="col-lg-3 col-sm-6 col-xs-12">
                 <div class="team-img mb_20">
-                    <a href="speaker.html"><img src="{{asset('dist-front/images/speaker-1.jpg')}}"></a>
+                    <a href="{{ route('speaker', $speaker->slug) }}"><img src="{{asset('uploads/'.$speaker->photo)}}"></a>
                 </div>
                 <div class="team-info text-center">
-                    <h6><a href="speaker.html">Danny Allen</a></h6>
-                    <p>Founder, AA Company</p>
+                    <h6><a href="{{ route('speaker', $speaker->slug) }}">{{ $speaker->name }}</a></h6>
+                    <p>{{ $speaker->designation }}</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6 col-xs-12">
-                <div class="team-img mb_20">
-                    <a href="speaker.html"><img src="{{asset('dist-front/images/speaker-2.jpg')}}"></a>
-                </div>
-                <div class="team-info text-center">
-                    <h6><a href="speaker.html">John Sword</a></h6>
-                    <p>Founder, BB Company</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-xs-12">
-                <div class="team-img mb_20">
-                    <a href="speaker.html"><img src="{{asset('dist-front/images/speaker-3.jpg')}}"></a>
-                </div>
-                <div class="team-info text-center">
-                    <h6><a href="speaker.html">Steven Gragg</a></h6>
-                    <p>Founder, CC Company</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-xs-12">
-                <div class="team-img mb_20">
-                    <a href="speaker.html"><img src="{{asset('dist-front/images/speaker-4.jpg')}}"></a>
-                </div>
-                <div class="team-info text-center">
-                    <h6><a href="speaker.html">Jordan Parker</a></h6>
-                    <p>Founder, DD Company</p>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>
 
-
-<div id="counter-section" class="pt_70 pb_70" style="background-image: url({{asset('dist-front/images/counter-bg.jpg')}});">
+@if ($home_counter->status == 'show')
+<div id="counter-section" class="pt_70 pb_70" style="background-image: url({{asset('uploads/'. $home_counter->background)}});">
     <div class="container">
         <div class="row number-counters text-center">
             <div class="col-lg-3 col-sm-6 col-xs-12"> 
                 <div class="counters-item">
-                    <i class="fa fa-calendar"></i>
-                    <strong data-to="3">0</strong>
-                    <p>Days Event</p>
+                    <i class="{{ $home_counter->item1_icon }}"></i>
+                    <strong data-to="{{ $home_counter->item1_number }}">0</strong>
+                    <p>{{ $home_counter->item1_title }}</p>
                 </div>
             </div>
             
             <div class="col-lg-3 col-sm-6 col-xs-12"> 
                 <div class="counters-item">
-                <i class="fa fa-user"></i>
-                    <strong data-to="8">0</strong>
-                    <p>Speakers</p>
+                <i class="{{ $home_counter->item2_icon }}"></i>
+                    <strong data-to="{{ $home_counter->item2_number }}">0</strong>
+                    <p>{{ $home_counter->item2_title }}</p>
                 </div>
             </div>
             
             <div class="col-lg-3 col-sm-6 col-xs-12">
                 <div class="counters-item">
-                    <i class="fa fa-users"></i>
-                    <strong data-to="60">0</strong>
-                    <p>Members Registered</p>
+                    <i class="{{ $home_counter->item3_icon }}"></i>
+                    <strong data-to="{{ $home_counter->item3_number }}">0</strong>
+                    <p>{{ $home_counter->item3_title }}</p>
                 </div>
             </div>
             
             <div class="col-lg-3 col-sm-6 col-xs-12">
                 <div class="counters-item">
-                    <i class="fa fa-th-list"></i>
-                    <strong data-to="12">0</strong>
-                    <p>Sponsors</p>
+                    <i class="{{ $home_counter->item4_icon }}"></i>
+                    <strong data-to="{{ $home_counter->item4_number }}">0</strong>
+                    <p>{{ $home_counter->item4_title }}</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endif
 
 
 

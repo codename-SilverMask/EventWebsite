@@ -12,10 +12,10 @@
                             <a class="smooth-scroll nav-link" href="{{ route('home')}}">Home</a>
                         </li>
                         <li>
-                            <a class="smooth-scroll nav-link" href="speakers.html">Speakers</a>
+                            <a class="smooth-scroll nav-link" href="{{ route('speakers') }}">Speakers</a>
                         </li>
                         <li>
-                            <a class="smooth-scroll nav-link" href="schedule.html">Schedule</a>
+                            <a class="smooth-scroll nav-link" href="{{ route('schedule') }}">Schedule</a>
                         </li>
                         <li>
                             <a class="smooth-scroll nav-link" href="pricing.html">Pricing</a>
