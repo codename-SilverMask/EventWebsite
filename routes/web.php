@@ -15,12 +15,14 @@ use App\Http\Controllers\Admin\AdminScheduleDayController;
 use App\Http\Controllers\Admin\AdminScheduleController;
 use App\Http\Controllers\Admin\AdminSpeakerScheduleController;
 use App\Http\Controllers\Admin\AdminSponsorCategoryController;
+use App\Http\Controllers\Admin\AdminSponsorController;
 
 //Front
 Route::get('/',[FrontController::class,'home'])->name('home');
 Route::get('/contact',[FrontController::class,'contact'])->name('contact');
 Route::get('/speakers',[FrontController::class,'speakers'])->name('speakers');
 Route::get('/schedule',[FrontController::class,'schedule'])->name('schedule');
+Route::get('/sponsors',[FrontController::class,'sponsors'])->name('sponsors');
 Route::get('/speaker/{slug}',[FrontController::class,'speaker'])->name('speaker');
 Route::get('/registration',[FrontController::class,'registration'])->name('registration');
 Route::get('/forget-password',[FrontController::class,'forget_password'])->name('forget_password');
@@ -90,6 +92,14 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/sponsor-category/edit/{id}',[AdminSponsorCategoryController::class,'edit'])->name('admin_sponsor_category_edit');
     Route::post('/sponsor-category/update/{id}',[AdminSponsorCategoryController::class,'update'])->name('admin_sponsor_category_update');
     Route::get('/sponsor-category/delete/{id}',[AdminSponsorCategoryController::class,'delete'])->name('admin_sponsor_category_delete');
+
+    Route::get('/sponsor/index',[AdminSponsorController::class,'index'])->name('admin_sponsor_index');
+    Route::get('/sponsor/create',[AdminSponsorController::class,'create'])->name('admin_sponsor_create');
+    Route::post('/sponsor/store',[AdminSponsorController::class,'store'])->name('admin_sponsor_store');
+    Route::get('/sponsor/edit/{id}',[AdminSponsorController::class,'edit'])->name('admin_sponsor_edit');
+    Route::post('/sponsor/update/{id}',[AdminSponsorController::class,'update'])->name('admin_sponsor_update');
+    Route::get('/sponsor/delete/{id}',[AdminSponsorController::class,'delete'])->name('admin_sponsor_delete');
+    
     
 
 

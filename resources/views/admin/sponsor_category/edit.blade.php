@@ -23,7 +23,7 @@
                                         </div>
                                         <div class="mb-4">
                                             <label class="form-label">Description</label>
-                                            <input type="text" class="form-control" name="description" value="{{ $sponsor_category->description }}">
+                                            <textarea class="form-control" name="description" rows="5">{{ $sponsor_category->description }}</textarea>
                                         </div>
                                         <div class="mb-4">
                                             <label class="form-label"></label>

@@ -58,9 +58,6 @@ class AdminSponsorCategoryController extends Controller
     }
     public function delete($id){
         $sponsor_category = SponsorCategory::where('id',$id)->first();
-        if($sponsor_category->photo != '') {
-            unlink(public_path('uploads/'.$sponsor_category->photo));
-        }
         $sponsor_category->delete();
         return redirect()->route('admin_sponsor_category_index')->with('success','sponsor_category deleted successfully');
         
