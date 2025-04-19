@@ -37,26 +37,13 @@
         </div>
 
         <div class="row pt_40 mb_50">
+            @foreach ($sponsor_category->sponsors as $sponsor)
             <div class="col-md-3">
                 <div class="sponsors-logo">
-                    <a href="sponsor.html"><img src="images/partner-1.png" class="img-responsive" alt=""></a>
+                    <a href="{{ route('sponsor', $sponsor->slug) }}"><img src="{{ asset('uploads/'.$sponsor->logo) }}" class="img-responsive" alt=""></a>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="sponsors-logo">
-                    <a href="sponsor.html"><img src="images/partner-2.png" class="img-responsive" alt=""></a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="sponsors-logo">
-                    <a href="sponsor.html"><img src="images/partner-3.png" class="img-responsive" alt=""></a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="sponsors-logo">
-                    <a href="sponsor.html"><img src="images/partner-4.png" class="img-responsive" alt=""> </a>
-                </div>
-            </div>
+            @endforeach
         </div>
         @endforeach
     </div>

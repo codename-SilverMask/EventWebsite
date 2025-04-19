@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Speaker;
+use Illuminate\Validation\Rule;
 
 class AdminSpeakerController extends Controller
 {
@@ -60,7 +61,7 @@ class AdminSpeakerController extends Controller
         $speaker = Speaker::where('id',$id)->first();
         $request->validate([
             'name' => 'required',
-            'slug' => 'required|alpha_dash|regex:/^[a-zA-Z-]+$/|unique:speakers,slug,'.$speaker->id,
+            'slug' => ['required','alpha_dash','regex:/^[a-zA-Z-]+$/', Rule::unique('speakers')->ignore($speaker->id)],
             'designation' => 'required',
             'email' => 'required|email|unique:speakers,email,'.$speaker->id,
             'phone' => 'required|unique:speakers,phone,'.$speaker->id,

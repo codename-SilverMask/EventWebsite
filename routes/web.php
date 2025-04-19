@@ -23,6 +23,7 @@ Route::get('/contact',[FrontController::class,'contact'])->name('contact');
 Route::get('/speakers',[FrontController::class,'speakers'])->name('speakers');
 Route::get('/schedule',[FrontController::class,'schedule'])->name('schedule');
 Route::get('/sponsors',[FrontController::class,'sponsors'])->name('sponsors');
+Route::get('/sponsor/{slug}',[FrontController::class,'sponsor'])->name('sponsor');
 Route::get('/speaker/{slug}',[FrontController::class,'speaker'])->name('speaker');
 Route::get('/registration',[FrontController::class,'registration'])->name('registration');
 Route::get('/forget-password',[FrontController::class,'forget_password'])->name('forget_password');
@@ -34,6 +35,7 @@ Route::post('/reset-password/{token}/{email}',[FrontController::class,'reset_pas
 Route::get('/login',[FrontController::class,'login'])->name('login');
 Route::get('/logout',[FrontController::class,'logout'])->name('logout');
 Route::post('/login',[FrontController::class,'login_submit'])->name('login_submit');
+
 
 //User or Ateendee
 Route::middleware('auth')->prefix('attendee')->group(function () {

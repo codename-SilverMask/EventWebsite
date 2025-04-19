@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SponsorCategory;
+use App\Models\Sponsor;
 
 class AdminSponsorCategoryController extends Controller
 {
@@ -57,6 +58,13 @@ class AdminSponsorCategoryController extends Controller
         
     }
     public function delete($id){
+        //Check if there is sponsor under this category
+        $sponsor = Sponsor::where('sponsor_category_id',$id)->first();
+        if($sponsor){
+            return redirect()->route('admin_sponsor_category_index')->with('error','This category has sponsors under it. Please delete them first.');
+        }
+
+
         $sponsor_category = SponsorCategory::where('id',$id)->first();
         $sponsor_category->delete();
         return redirect()->route('admin_sponsor_category_index')->with('success','sponsor_category deleted successfully');
