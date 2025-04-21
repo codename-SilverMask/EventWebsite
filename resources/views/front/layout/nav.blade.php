@@ -26,7 +26,7 @@
                         <li class="nav-item dropdown"> <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Pages </a>
                             <div class="dropdown-menu" id="dropmenu" aria-labelledby="navbarDropdown"> 
                                 <a class="dropdown-item" href="{{ route('sponsors') }}">Sponsors</a>
-                                <a class="dropdown-item" href="organizers.html">Organizers</a>
+                                <a class="dropdown-item" href="{{ route('organisers') }}">Organizers</a>
                                 <a class="dropdown-item" href="accommodations.html">Accommodations</a>
                                 <a class="dropdown-item" href="photo-gallery.html">Photo Gallery</a>
                                 <a class="dropdown-item" href="video-gallery.html">Video Gallery</a>

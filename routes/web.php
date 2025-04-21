@@ -16,6 +16,9 @@ use App\Http\Controllers\Admin\AdminScheduleController;
 use App\Http\Controllers\Admin\AdminSpeakerScheduleController;
 use App\Http\Controllers\Admin\AdminSponsorCategoryController;
 use App\Http\Controllers\Admin\AdminSponsorController;
+use App\Http\Controllers\Admin\AdminOrganiserController;
+use App\Http\Controllers\Admin\AdminAccommodationController;
+
 
 //Front
 Route::get('/',[FrontController::class,'home'])->name('home');
@@ -35,6 +38,8 @@ Route::post('/reset-password/{token}/{email}',[FrontController::class,'reset_pas
 Route::get('/login',[FrontController::class,'login'])->name('login');
 Route::get('/logout',[FrontController::class,'logout'])->name('logout');
 Route::post('/login',[FrontController::class,'login_submit'])->name('login_submit');
+Route::get('/organisers',[FrontController::class,'organisers'])->name('organisers');
+Route::get('/organiser/{slug}',[FrontController::class,'organiser'])->name('organiser');
 
 
 //User or Ateendee
@@ -70,6 +75,13 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::post('/speaker/update/{id}',[AdminSpeakerController::class,'update'])->name('admin_speaker_update');
     Route::get('/speaker/delete/{id}',[AdminSpeakerController::class,'delete'])->name('admin_speaker_delete');
 
+    Route::get('/organiser/index',[AdminOrganiserController::class,'index'])->name('admin_organiser_index');
+    Route::get('/organiser/create',[AdminOrganiserController::class,'create'])->name('admin_organiser_create');
+    Route::post('/organiser/store',[AdminOrganiserController::class,'store'])->name('admin_organiser_store');
+    Route::get('/organiser/edit/{id}',[AdminOrganiserController::class,'edit'])->name('admin_organiser_edit');
+    Route::post('/organiser/update/{id}',[AdminOrganiserController::class,'update'])->name('admin_organiser_update');
+    Route::get('/organiser/delete/{id}',[AdminOrganiserController::class,'delete'])->name('admin_organiser_delete');
+
     Route::get('/schedule-day/index',[AdminScheduleDayController::class,'index'])->name('admin_schedule_day_index');
     Route::get('/schedule-day/create',[AdminScheduleDayController::class,'create'])->name('admin_schedule_day_create');
     Route::post('/schedule-day/store',[AdminScheduleDayController::class,'store'])->name('admin_schedule_day_store');
@@ -101,6 +113,13 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/sponsor/edit/{id}',[AdminSponsorController::class,'edit'])->name('admin_sponsor_edit');
     Route::post('/sponsor/update/{id}',[AdminSponsorController::class,'update'])->name('admin_sponsor_update');
     Route::get('/sponsor/delete/{id}',[AdminSponsorController::class,'delete'])->name('admin_sponsor_delete');
+
+    Route::get('/accommodation/index',[AdminAccommodationController::class,'index'])->name('admin_accommodation_index');
+    Route::get('/accommodation/create',[AdminAccommodationController::class,'create'])->name('admin_accommodation_create');
+    Route::post('/accommodation/store',[AdminAccommodationController::class,'store'])->name('admin_accommodation_store');
+    Route::get('/accommodation/edit/{id}',[AdminAccommodationController::class,'edit'])->name('admin_accommodation_edit');
+    Route::post('/accommodation/update/{id}',[AdminAccommodationController::class,'update'])->name('admin_accommodation_update');
+    Route::get('/accommodation/delete/{id}',[AdminAccommodationController::class,'delete'])->name('admin_accommodation_delete');
     
     
 

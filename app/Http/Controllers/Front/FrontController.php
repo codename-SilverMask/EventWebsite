@@ -16,6 +16,7 @@ use App\Models\ScheduleDay;
 use App\Models\Speaker;
 use App\Models\SponsorCategory;
 use App\Models\Sponsor;
+use App\Models\Organiser;
 
 class FrontController extends Controller
 {
@@ -251,6 +252,22 @@ class FrontController extends Controller
             return redirect()->route('sponsors')->with('error','Sponsor not found');
         }
         return view('front.sponsor' , compact('sponsor'));  
+        
+    }
+
+    public function organisers(){
+        $organisers = Organiser::get();
+        return view('front.organisers' , compact('organisers'));
+        
+    }
+
+    public function organiser($slug)
+    {
+        $organiser = Organiser::where('slug',$slug)->first();
+        if(!$organiser) {
+            return redirect()->route('organisers')->with('error','Organiser not found');
+        }
+        return view('front.organiser' , compact('organiser'));  
         
     }
 

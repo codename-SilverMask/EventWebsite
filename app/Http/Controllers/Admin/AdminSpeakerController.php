@@ -47,11 +47,8 @@ class AdminSpeakerController extends Controller
         $speaker->save();
 
         return redirect()->route('admin_speaker_index')->with('success','Speaker added successfully');
-
-
-               
-        
     }
+    
     public function edit($id){
         $speaker = Speaker::where('id',$id)->first();
         return view('admin.speaker.edit' , compact('speaker'));
