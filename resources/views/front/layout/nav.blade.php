@@ -27,8 +27,8 @@
                             <div class="dropdown-menu" id="dropmenu" aria-labelledby="navbarDropdown"> 
                                 <a class="dropdown-item" href="{{ route('sponsors') }}">Sponsors</a>
                                 <a class="dropdown-item" href="{{ route('organisers') }}">Organizers</a>
-                                <a class="dropdown-item" href="accommodations.html">Accommodations</a>
-                                <a class="dropdown-item" href="photo-gallery.html">Photo Gallery</a>
+                                <a class="dropdown-item" href="{{ route('accommodations') }}">Accommodations</a>
+                                <a class="dropdown-item" href="{{ route('photo_gallery') }}">Photo Gallery</a>
                                 <a class="dropdown-item" href="video-gallery.html">Video Gallery</a>
                                 <a class="dropdown-item" href="faq.html">FAQ</a>
                                 <a class="dropdown-item" href="testimonials.html">Testimonials</a> 

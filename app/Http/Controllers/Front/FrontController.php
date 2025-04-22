@@ -17,6 +17,9 @@ use App\Models\Speaker;
 use App\Models\SponsorCategory;
 use App\Models\Sponsor;
 use App\Models\Organiser;
+use App\Models\Accommodation;
+use App\Models\Photo;
+
 
 class FrontController extends Controller
 {
@@ -268,6 +271,18 @@ class FrontController extends Controller
             return redirect()->route('organisers')->with('error','Organiser not found');
         }
         return view('front.organiser' , compact('organiser'));  
+        
+    }
+
+    public function accommodations(){
+        $accommodations = Accommodation::get();
+        return view('front.accommodations' , compact('accommodations'));
+        
+    }
+
+    public function photo_gallery(){
+        $photos = Photo::paginate(15);
+        return view('front.photo_gallery' , compact('photos'));
         
     }
 
