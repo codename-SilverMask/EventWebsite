@@ -19,6 +19,7 @@ use App\Models\Sponsor;
 use App\Models\Organiser;
 use App\Models\Accommodation;
 use App\Models\Photo;
+use App\Models\Video;
 
 
 class FrontController extends Controller
@@ -283,6 +284,12 @@ class FrontController extends Controller
     public function photo_gallery(){
         $photos = Photo::paginate(15);
         return view('front.photo_gallery' , compact('photos'));
+        
+    }
+
+    public function video_gallery(){
+        $videos = Video::paginate(15);
+        return view('front.video_gallery' , compact('videos'));
         
     }
 

@@ -19,7 +19,8 @@ use App\Http\Controllers\Admin\AdminSponsorController;
 use App\Http\Controllers\Admin\AdminOrganiserController;
 use App\Http\Controllers\Admin\AdminAccommodationController;
 use App\Http\Controllers\Admin\AdminPhotoController;
-
+use App\Http\Controllers\Admin\AdminVideoController;
+use App\Http\Controllers\Admin\AdminFaqController;
 
 //Front
 Route::get('/',[FrontController::class,'home'])->name('home');
@@ -43,6 +44,8 @@ Route::get('/organisers',[FrontController::class,'organisers'])->name('organiser
 Route::get('/organiser/{slug}',[FrontController::class,'organiser'])->name('organiser');
 Route::get('/accommodations',[FrontController::class,'accommodations'])->name('accommodations');
 Route::get('/photo-gallery',[FrontController::class,'photo_gallery'])->name('photo_gallery');
+Route::get('/video-gallery',[FrontController::class,'video_gallery'])->name('video_gallery');
+Route::get('/faq',[FrontController::class,'faq'])->name('faq');
 
 
 
@@ -132,6 +135,20 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/photo/edit/{id}',[AdminPhotoController::class,'edit'])->name('admin_photo_edit');
     Route::post('/photo/update/{id}',[AdminPhotoController::class,'update'])->name('admin_photo_update');
     Route::get('/photo/delete/{id}',[AdminPhotoController::class,'delete'])->name('admin_photo_delete');
+
+    Route::get('/video/index',[AdminVideoController::class,'index'])->name('admin_video_index');
+    Route::get('/video/create',[AdminVideoController::class,'create'])->name('admin_video_create');
+    Route::post('/video/store',[AdminVideoController::class,'store'])->name('admin_video_store');
+    Route::get('/video/edit/{id}',[AdminVideoController::class,'edit'])->name('admin_video_edit');
+    Route::post('/video/update/{id}',[AdminVideoController::class,'update'])->name('admin_video_update');
+    Route::get('/video/delete/{id}',[AdminVideoController::class,'delete'])->name('admin_video_delete');
+
+    Route::get('/faq/index',[AdminFaqController::class,'index'])->name('admin_faq_index');
+    Route::get('/faq/create',[AdminFaqController::class,'create'])->name('admin_faq_create');
+    Route::post('/faq/store',[AdminFaqController::class,'store'])->name('admin_faq_store');
+    Route::get('/faq/edit/{id}',[AdminFaqController::class,'edit'])->name('admin_faq_edit');
+    Route::post('/faq/update/{id}',[AdminFaqController::class,'update'])->name('admin_faq_update');
+    Route::get('/faq/delete/{id}',[AdminFaqController::class,'delete'])->name('admin_faq_delete');
     
     
 
