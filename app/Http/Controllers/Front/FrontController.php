@@ -20,7 +20,8 @@ use App\Models\Organiser;
 use App\Models\Accommodation;
 use App\Models\Photo;
 use App\Models\Video;
-
+use App\Models\Faq;
+use App\Models\Testimonial;
 
 class FrontController extends Controller
 {
@@ -292,6 +293,20 @@ class FrontController extends Controller
         return view('front.video_gallery' , compact('videos'));
         
     }
+
+    public function faq(){
+        $faqs = Faq::paginate(15);
+        return view('front.faq' , compact('faqs'));
+        
+    }
+
+    public function testimonial(){
+        $testimonials= Testimonial::get();
+        return view('front.testimonial', compact('testimonials'));
+        
+    }
+
+
 
 
 

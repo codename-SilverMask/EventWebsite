@@ -30,8 +30,8 @@
                                 <a class="dropdown-item" href="{{ route('accommodations') }}">Accommodations</a>
                                 <a class="dropdown-item" href="{{ route('photo_gallery') }}">Photo Gallery</a>
                                 <a class="dropdown-item" href="{{ route('video_gallery') }}">Video Gallery</a>
-                                <a class="dropdown-item" href="faq.html">FAQ</a>
-                                <a class="dropdown-item" href="testimonials.html">Testimonials</a> 
+                                <a class="dropdown-item" href="{{ route('faq') }}">FAQ</a>
+                                <a class="dropdown-item" href="{{ route('testimonial') }}">Testimonials</a> 
                             </div>
                         </li>
                         <li>

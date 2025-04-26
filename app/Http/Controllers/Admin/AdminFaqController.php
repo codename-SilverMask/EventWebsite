@@ -44,14 +44,12 @@ class AdminFaqController extends Controller
     public function update(Request $request, $id){
         $faq = Faq::where('id',$id)->first();
         $request->validate([
-            'faq' => [
-                'required',
-                Rule::unique('faqs')->ignore($faq->id),
-            ],
+            'question' => ['required'],
+            'answer' => ['required'],
         ]);
 
-        $faq->caption = $request->caption;
-        $faq->faq = $request->faq;
+        $faq->question = $request->question;
+        $faq->answer = $request->answer;
         $faq->save();
         return redirect()->route('admin_faq_index')->with('success','faq updated successfully');
 
