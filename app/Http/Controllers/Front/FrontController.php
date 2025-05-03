@@ -22,6 +22,7 @@ use App\Models\Photo;
 use App\Models\Video;
 use App\Models\Faq;
 use App\Models\Testimonial;
+use App\Models\Posts;
 
 class FrontController extends Controller
 {
