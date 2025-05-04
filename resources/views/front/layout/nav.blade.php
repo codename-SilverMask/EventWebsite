@@ -21,7 +21,7 @@
                             <a class="smooth-scroll nav-link" href="pricing.html">Pricing</a>
                         </li>
                         <li>
-                            <a class="smooth-scroll nav-link" href="blog.html">Blog</a>
+                            <a class="smooth-scroll nav-link" href="{{ route('blog') }}">Blog</a>
                         </li>
                         <li class="nav-item dropdown"> <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Pages </a>
                             <div class="dropdown-menu" id="dropmenu" aria-labelledby="navbarDropdown"> 

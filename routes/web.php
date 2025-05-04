@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\AdminVideoController;
 use App\Http\Controllers\Admin\AdminFaqController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
 use App\Http\Controllers\Admin\AdminPostController;
+use App\Http\Controllers\Admin\AdminPackageController;
 
 
 //Front
@@ -50,8 +51,8 @@ Route::get('/photo-gallery',[FrontController::class,'photo_gallery'])->name('pho
 Route::get('/video-gallery',[FrontController::class,'video_gallery'])->name('video_gallery');
 Route::get('/faq',[FrontController::class,'faq'])->name('faq');
 Route::get('/testimonial',[FrontController::class,'testimonial'])->name('testimonial');
-Route::get('/post',[FrontController::class,'post'])->name('post');
-Route::get('/post/{slug}',[FrontController::class,'post_details'])->name('post_details');
+Route::get('/blog',[FrontController::class,'blog'])->name('blog');
+Route::get('/post/{slug}',[FrontController::class,'post'])->name('post');
 
 
 
@@ -170,6 +171,13 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/post/edit/{id}',[AdminPostController::class,'edit'])->name('admin_post_edit');
     Route::post('/post/update/{id}',[AdminPostController::class,'update'])->name('admin_post_update');
     Route::get('/post/delete/{id}',[AdminPostController::class,'delete'])->name('admin_post_delete');
+
+    Route::get('/package/index',[AdminPackageController::class,'index'])->name('admin_package_index');
+    Route::get('/package/create',[AdminPackageController::class,'create'])->name('admin_package_create');
+    Route::post('/package/store',[AdminPackageController::class,'store'])->name('admin_package_store');
+    Route::get('/package/edit/{id}',[AdminPackageController::class,'edit'])->name('admin_package_edit');
+    Route::post('/package/update/{id}',[AdminPackageController::class,'update'])->name('admin_package_update');
+    Route::get('/package/delete/{id}',[AdminPackageController::class,'delete'])->name('admin_package_delete');
     
     
 

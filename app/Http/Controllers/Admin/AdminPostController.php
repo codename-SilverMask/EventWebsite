@@ -51,12 +51,11 @@ class AdminPostController extends Controller
     public function update(Request $request, $id){
         $post = Post::where('id',$id)->first();
         $request->validate([
-            'name' => 'required',
+            'title' => 'required',
             'slug' => ['required','alpha_dash','regex:/^[a-zA-Z-]+$/', Rule::unique('posts')->ignore($post->id)],
-            'designation' => 'required',
-            'email' => 'required|email|unique:posts,email,'.$post->id,
-            'phone' => 'required|unique:posts,phone,'.$post->id,
-        ]);
+            'short_description' => 'required',
+            'description' => 'required',
+            ]);
         if($request->photo) {
             $request->validate([
                 'photo' => ['mimes:jpg,jpeg,png,gif','max:2024'],
@@ -64,24 +63,17 @@ class AdminPostController extends Controller
             if($post->photo != '') {
                 unlink(public_path('uploads/'.$post->photo));
                 
-                $final_name = '$post_'.time().'.'.$request->photo->extension();
+                $final_name = 'post_'.time().'.'.$request->photo->extension();
                 $request->photo->move(public_path('uploads'), $final_name);
                 $post->photo = $final_name; 
             }
         }
-        $post->name = $request->name;
+        $post->title = $request->title;
         $post->slug = $request->slug;
-        $post->designation = $request->designation;
-        $post->email = $request->email;
-        $post->phone = $request->phone;
-        $post->biography = $request->biography;
-        $post->address = $request->address;
-        $post->facebook = $request->facebook;
-        $post->twitter = $request->twitter;
-        $post->linkedin = $request->linkedin;
-        $post->instagram = $request->instagram;
+        $post->description = $request->description;
+        $post->short_description = $request->short_description;
         $post->save();
-        return redirect()->route('admin_post_index')->with('success','post updated successfully');
+        return redirect()->route('admin_post_index')->with('success','Post updated successfully');
 
         
     }
@@ -91,7 +83,7 @@ class AdminPostController extends Controller
             unlink(public_path('uploads/'.$post->photo));
         }
         $post->delete();
-        return redirect()->route('admin_post_index')->with('success','post deleted successfully');
+        return redirect()->route('admin_post_index')->with('success','Post deleted successfully');
         
     }
 

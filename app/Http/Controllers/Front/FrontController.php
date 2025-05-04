@@ -22,7 +22,7 @@ use App\Models\Photo;
 use App\Models\Video;
 use App\Models\Faq;
 use App\Models\Testimonial;
-use App\Models\Posts;
+use App\Models\Post;
 
 class FrontController extends Controller
 {
@@ -307,10 +307,19 @@ class FrontController extends Controller
         
     }
 
+    public function blog(){
+        $posts= Post::get();
+        return view('front.blog', compact('posts'));
+        
+    }
 
 
-
-
+public function post($slug){
+    $post = Post::where('slug',$slug)->first();
+    if(!$post) {
+        return redirect()->route('blog')->with('error','Post not found');
+    }
+    return view('front.post', compact('post'));
+}
 
 }
- 
